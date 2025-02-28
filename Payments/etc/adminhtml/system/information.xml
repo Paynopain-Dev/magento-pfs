@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="information" translate="label comment" sortOrder="1" showInWebsite="1" showInStore="1" showInDefault="1">
+        <label><![CDATA[Documentation & Support]]></label>
+        <frontend_model>Magento\Config\Block\System\Config\Form\Fieldset</frontend_model>
+        <comment>
+            <![CDATA[
+                <p>For support please contact: <a href="mailto:magento@paylands.com" title="magento@paylands.com">magento@paylands.com</a></p>
+                <p><strong>Online documentation:</strong> <a href="https://docs.paylands.com/docs/" target="_blank" title="Online documentation">https://docs.paylands.com/docs/</a></p>
+            ]]>
+        </comment>
+        <field id="version" type="label" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Extension version</label>
+            <frontend_model>Paynopain\Payments\Model\System\Config\Field\Version</frontend_model>
+            <config_path>payment/paynopain_payment/version</config_path>
+        </field>
+    </group>
+</include>

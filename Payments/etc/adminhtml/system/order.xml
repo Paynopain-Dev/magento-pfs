@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="order" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+        <label>Order settings</label>
+
+        <field id="payment_action" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Payment Action</label>
+            <source_model>Paynopain\Payments\Model\System\Config\Source\PaymentAction</source_model>
+            <config_path>payment/paynopain_payment/payment_action</config_path>
+        </field>
+
+        <field id="order_status_authorized" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>New order status for orders</label>
+            <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+            <config_path>payment/paynopain_payment/order_status_authorized</config_path>
+        </field>
+
+        <field id="order_capture" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Capture orders on status</label>
+            <depends>
+                <field id="payment_action">DEFERRED</field>
+            </depends>
+            <source_model>Magento\Sales\Model\Config\Source\Order\Status</source_model>
+            <config_path>payment/paynopain_payment/order_capture</config_path>
+        </field>
+
+        <field id="generate_invoice" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Auto generate invoice</label>
+            <tooltip>This option overrides 'New order status authorize and captured orders'. This option will set the order status to 'processing' automatically</tooltip>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>payment/paynopain_payment/generate_invoice</config_path>
+        </field>
+
+        <field id="keep_quote_on_error" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Keep quote if there is an error in payment</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>payment/paynopain_payment/keep_quote_on_error</config_path>
+        </field>
+
+        <field id="keep_quote_on_error_message" type="text" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Message error</label>
+            <depends>
+                <field id="keep_quote_on_error">1</field>
+            </depends>
+            <config_path>payment/paynopain_payment/keep_quote_on_error_message</config_path>
+        </field>
+    </group>
+</include>

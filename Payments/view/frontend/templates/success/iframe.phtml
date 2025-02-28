@@ -1,0 +1,4 @@
+<?php /** @var \Paynopain\Payments\Block\Success\Iframe $block */?>
+<script type="text/javascript">
+    window.parent.location.href = '<?=$block->getSuccessPageUrl()?>';
+</script>

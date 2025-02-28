@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <title>Paylands - My stored cards</title>
+        <script src="https://api.paylands.com/js/v1-iframe.js" src_type="url"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block name="storedcards.add-new" class="Paynopain\Payments\Block\StoredCards\AddNew" template="Paynopain_Payments::stored_cards/add-new.phtml" cacheable="false" />
+            <block name="storedcards.list-view" class="Paynopain\Payments\Block\StoredCards\ListView" template="Paynopain_Payments::stored_cards/list-view.phtml" />
+        </referenceContainer>
+    </body>
+</page>

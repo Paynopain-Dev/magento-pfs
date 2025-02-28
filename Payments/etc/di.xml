@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Paynopain Generated Payment Order Entity -->
+    <preference for="Paynopain\Payments\Api\GeneratedPaymentOrderRepositoryInterface" type="Paynopain\Payments\Model\GeneratedPaymentOrderRepository" />
+    <preference for="Paynopain\Payments\Api\Data\GeneratedPaymentOrderInterface" type="Paynopain\Payments\Model\GeneratedPaymentOrder" />
+    <preference for="Paynopain\Payments\Api\Data\GeneratedPaymentOrderSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <!--Paynopain Card Token Entity -->
+    <preference for="Paynopain\Payments\Api\CardTokenRepositoryInterface" type="Paynopain\Payments\Model\CardTokenRepository" />
+    <preference for="Paynopain\Payments\Api\Data\CardTokenInterface" type="Paynopain\Payments\Model\CardToken" />
+    <preference for="Paynopain\Payments\Api\Data\CardTokenSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <type name="Magento\Sales\Model\Order\Creditmemo\RefundOperation">
+        <plugin name="Paynopain_Payments::PreventTransactionByMagento" type="Paynopain\Payments\Plugin\PreventTransactionsRefundOperation" sortOrder="10" disabled="false"/>
+    </type>
+
+    <type name="Magento\Framework\HTTP\PhpEnvironment\RemoteAddress">
+        <arguments>
+            <argument name="alternativeHeaders" xsi:type="array">
+                <item name="http_client_ip" xsi:type="string">HTTP_CLIENT_IP</item>
+                <item name="http_x_forwarded_for" xsi:type="string">HTTP_X_FORWARDED_FOR</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

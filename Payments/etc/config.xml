@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <paynopain_payment>
+                <model>Paynopain\Payments\Model\Payment\PaynopainPayment</model>
+                <environment>0</environment>
+                <integration_type>redirect</integration_type>
+                <active>0</active>
+                <title>PAYNOPAIN Payments</title>
+                <instructions>PAYNOPAIN Payments</instructions>
+                <sort_order>1</sort_order>
+                <payment_action>AUTHORIZATION</payment_action>
+                <order_status_authorized>pending</order_status_authorized>
+                <order_capture>processing</order_capture>
+                <secure>1</secure>
+                <generate_invoice>1</generate_invoice>
+                <keep_quote_on_error>1</keep_quote_on_error>
+                <keep_quote_on_error_message>We're sorry, something was wrong with payment. Try again or select another of the availables payment methods, such as {{AVAILABLE_METHODS}}.</keep_quote_on_error_message>
+                <debug_logs>0</debug_logs>
+            </paynopain_payment>
+        </payment>
+    </default>
+</config>

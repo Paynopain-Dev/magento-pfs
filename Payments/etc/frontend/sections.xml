@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Customer:etc/sections.xsd">
+    <action name="customer/account/loginPost">
+        <section name="paynopain_payment_stored_cards" />
+    </action>
+    <action name="paynopain/storedcards/addnew">
+        <section name="paynopain_payment_stored_cards" />
+    </action>
+    <action name="paynopain/storedcards/updateadditional">
+        <section name="paynopain_payment_stored_cards" />
+    </action>
+    <action name="paynopain/storedcards/delete">
+        <section name="paynopain_payment_stored_cards" />
+    </action>
+</config>

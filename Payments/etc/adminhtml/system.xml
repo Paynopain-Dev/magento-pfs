@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment" sortOrder="10">
+            <resource>Paynopain_Payments::config_paynopain_base</resource>
+            <group id="paynopain_payment" translate="label comment" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+                <label>Paylands - Paynopain</label>
+                <comment><![CDATA[Online payment gateway for all businesses.]]></comment>
+                <fieldset_css>complex paynopain-section</fieldset_css>
+                <frontend_model>Paynopain\Payments\Block\System\Config\Form\Fieldset</frontend_model>
+                <attribute type="activity_path">payment/paynopain_payment/active</attribute>
+                <attribute type="displayIn">recommended_solutions</attribute>
+
+                <!-- Information settings -->
+                <include path="Paynopain_Payments::system/information.xml"/>
+
+                <!-- Integration settings -->
+                <include path="Paynopain_Payments::system/integration.xml"/>
+
+                <!-- General settings -->
+                <include path="Paynopain_Payments::system/general.xml"/>
+
+                <!-- Order settings -->
+                <include path="Paynopain_Payments::system/order.xml"/>
+
+                <!-- Other settings -->
+                <include path="Paynopain_Payments::system/other_settings.xml"/>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,118 @@
+<?php /** @var \Magento\Framework\Escaper $escaper */?>
+<?php /** @var \Paynopain\Payments\Block\StoredCards\AddNew $block */?>
+<div class="dashboard__content store-new-card">
+    <div class="dashboard__description">
+        <legend class="legend">
+            <span>
+                <?=__('Add a new card here')?>
+            </span>
+        </legend>
+    </div>
+
+    <div class="messages">
+        <div class="alert error">
+            <span class="alertClose">X</span>
+            <span class="alertText">
+                <br class="clear"/></span>
+        </div>
+    </div>
+
+    <div id="paylands-iframe"></div>
+
+    <div class="dashboard__actions">
+        <button type="submit" title="<?=__('Save card');?>" class="action save-card primary" style="display:none;">
+            <span>
+                <?=__('Save card');?>
+            </span>
+        </button>
+    </div>
+</div>
+<script>
+    var token = '<?=$block->getToken();?>';
+    var environment = '<?=$block->getEnvironment();?>';
+
+    window.addEventListener('message', receiveMessage => {
+        if (receiveMessage.data === 'paylandsLoaded') {
+            if (environment == 'SANDBOX') {
+                paylands.setMode('sandbox');
+            }
+
+            paylands.initializate(
+                token,
+                'paylands-iframe'
+            );
+        }
+    }, false);
+</script>
+<script>
+    require([
+        'jquery'
+    ], function($) {
+        $(document).ready(function() {
+            $('.save-card').show();
+
+            var messageAlert = $('.messages .alert');
+            var messageAlertText = messageAlert.children('.alertText');
+            $(messageAlert).click(function(){
+                $(this).hide();
+            });
+
+            window.addEventListener('message', receiveMessage => {
+                var messageReceived = receiveMessage.data.match(/(\w*):*\s*(.*)/);
+                var event = messageReceived[1];
+                var eventData = {};
+
+                if (event === 'paylandsLoaded') {
+                    $('.save-card').show();
+                } else {
+                    eventData = $.parseJSON($.trim(messageReceived[2]));
+                }
+
+                if (event === 'validation') {
+                    if (!eventData.cardCVV.valid) {
+                        $(messageAlertText).html('<?=__('CVV is invalid');?>');
+                        $(messageAlert).show();
+                    }
+
+                    if (!eventData.cardExpiryDate.valid) {
+                        $(messageAlertText).html('<?=__('Expiry date is invalid');?>');
+                        $(messageAlert).show();
+                    }
+
+                    if (!eventData.cardPan.valid) {
+                        $(messageAlertText).html('<?=__('Pan is invalid');?>');
+                    }
+
+                    if (eventData.cardCVV.valid && eventData.cardExpiryDate.valid && eventData.cardPan.valid) {
+                        paylands.storeSourceCard();
+                    } else {
+                        $(messageAlert).show();
+                    }
+                }
+
+                if (event === 'error') {
+                    $(messageAlertText).html('<?=__('Something went wrong. Please try again later');?>');
+                    $(messageAlert).show();
+                } else if (event === 'savedCard') {
+                    $.ajax({
+                        showLoader: true,
+                        url: '<?=$block->getSaveUrl();?>',
+                        data: eventData,
+                        type: 'POST'
+                    }).done(function (result) {
+                        if (result) {
+                            location.reload(true);
+                        } else {
+                            $(messageAlertText).html('<?=__('Something went wrong. Please try again later');?>');
+                            $(messageAlert).show();
+                        }
+                    });
+                }
+            }, false);
+
+            $('.save-card').on('click', function(){
+                paylands.validate();
+            });
+        });
+    });
+</script>

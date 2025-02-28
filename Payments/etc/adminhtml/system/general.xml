@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="general" translate="label" sortOrder="10" showInWebsite="1" showInStore="1"  showInDefault="1">
+        <label>General</label>
+        <field id="active" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1"  showInDefault="1">
+            <label>Active</label>
+            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+            <config_path>payment/paynopain_payment/active</config_path>
+        </field>
+
+        <field id="title" type="text" translate="label" sortOrder="10" showInWebsite="1" showInStore="1"  showInDefault="1">
+            <label>Title</label>
+            <config_path>payment/paynopain_payment/title</config_path>
+        </field>
+
+        <field id="description" type="textarea" translate="label" sortOrder="10" showInWebsite="1" showInStore="1"  showInDefault="1">
+            <label>Description</label>
+            <config_path>payment/paynopain_payment/instructions</config_path>
+        </field>
+
+        <field id="allowspecific" type="allowspecific" translate="label" sortOrder="10" showInWebsite="1" showInStore="1"  showInDefault="1">
+            <label>Applicable to countries</label>
+            <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+            <config_path>payment/paynopain_payment/allowspecific</config_path>
+        </field>
+
+        <field id="specificcountry" type="multiselect" translate="label" sortOrder="10" showInWebsite="1" showInStore="1"  showInDefault="1">
+            <label>Country list</label>
+            <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+            <can_be_empty>1</can_be_empty>
+            <config_path>payment/paynopain_payment/specificcountry</config_path>
+        </field>
+
+        <field id="sort_order" type="text" translate="label" sortOrder="10" showInWebsite="1" showInStore="1"  showInDefault="1">
+            <label>Appearance order</label>
+            <config_path>payment/paynopain_payment/sort_order</config_path>
+        </field>
+    </group>
+</include>

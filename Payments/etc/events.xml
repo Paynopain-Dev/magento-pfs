@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_save_before">
+        <observer name="Paynopain_Payments::PreventEmailOrderConfirmation" instance="Paynopain\Payments\Observer\BeforePlaceOrder" />
+        <observer name="Paynopain_Payments::APICaptureOrder" instance="Paynopain\Payments\Observer\BeforeSalesOrderSave" />
+    </event>
+
+    <event name="sales_order_creditmemo_save_before">
+        <observer name="Paynopain_Payments::APIRefundAfterCredaitMemo" instance="Paynopain\Payments\Observer\BeforeCreditMemo" />
+    </event>
+
+    <event name="customer_address_delete_before">
+        <observer name="Paynopain_Payments::APIDeleteAddress" instance="Paynopain\Payments\Observer\BeforeCustomerAddressDelete" />
+    </event>
+</config>

@@ -1,0 +1,19 @@
+/**
+ * Copyright © Redegal S.A All rights reserved.
+ * See COPYING.txt for license details.
+ */
+.paynopain-section .heading {
+    background: url("images/paynopain_logo.png") no-repeat 0 50% / 18rem auto;
+    padding-left: 20rem;
+}
+
+.paynopain-section .button-container {
+    float: right;
+}
+
+.paynopain-section .config-alt {
+    background: url("images/icon_cards.png") no-repeat scroll 0 0 / 100% auto;
+    height: 30px;
+    margin: 0.5rem 0 0;
+    width: 145px;
+}

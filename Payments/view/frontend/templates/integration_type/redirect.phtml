@@ -1,0 +1,38 @@
+<?php /** @var \Paynopain\Payments\Block\IntegrationType\Redirect $block */?>
+<style type="text/css">
+    .paynopain-paylands-message, .paynopain-paylands-redirect {
+        background: #f7f7f7;
+        margin: auto;
+        margin-top: 40px;
+        padding: 40px 24px 40px;
+        color: #666;
+        text-align: center;
+        width: 100%;
+        max-width: 480px;
+        font-family: "Open Sans", Hevetica, Arial;
+    }
+</style>
+<?php if ($block->getToken() === null): ?>
+    <div class="paynopain-paylands-message">
+        <?=__('There was an error and could not complete the request. Please wait to redirect you back to your cart.');?>
+        <script type="text/javascript">
+            require([
+                'mage/url'
+            ], function (url) {
+                setTimeout(function() {
+                    window.location.replace(url.build('paynopain/response/ko?soe_increment_id=<?=$block->getIncrementId()?>'));
+                }, 3000);
+            });
+        </script>
+    </div>
+<?php else: ?>
+    <div class="paynopain-paylands-redirect">
+        <h4><?=__('Redirecting to Paylands... please wait. If is not happening, please click <a href="%1" target="_self" title="Redirect to Paylands">here</a>', $block->getRedirectUrl());?></h4>
+        <input id="redirect-url" type="hidden" value="<?=$block->getRedirectUrl();?>" />
+    </div>
+<?php endif;?>
+<script type="text/javascript">
+    setTimeout(function() {
+        window.location.replace(document.getElementById('redirect-url').getAttribute('value'));
+    }, 1500);
+</script>

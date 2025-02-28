@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<page layout="1column"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Paynopain\Payments\Block\IntegrationType\Iframe" name="integration_type.iframe" template="Paynopain_Payments::integration_type/iframe.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+
+    <referenceBlock name="top.search" remove="true"/>
+    <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+    <referenceBlock name="wishlist_sidebar" remove="true" />
+</page>

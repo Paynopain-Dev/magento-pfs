@@ -1,0 +1,42 @@
+<?php /** @var \Paynopain\Payments\Block\IntegrationType\Iframe $block */?>
+<style type="text/css">
+    .paynopain-paylands-message {
+        background: #f7f7f7;
+        margin: auto;
+        margin-top: 40px;
+        padding: 40px 24px 40px;
+        color: #666;
+        text-align: center;
+        width: 100%;
+        max-width: 480px;
+        font-family: "Open Sans", Hevetica, Arial;
+    }
+
+    .paynopain-paylands-iframe {
+        background: #f7f7f7;
+        margin: auto;
+        margin-top: 40px;
+        color: #666;
+        text-align: center;
+        font-family: "Open Sans", Hevetica, Arial;
+    }
+</style>
+<?php if ($block->getToken() === null): ?>
+    <div class="paynopain-paylands-message">
+        <?=__('There was an error and could not complete the request. Please wait to redirect you back to your cart.');?>
+        <script type="text/javascript">
+            require([
+                'mage/url'
+            ], function (url) {
+                setTimeout(function() {
+                    window.location.replace(url.build('paynopain/response/ko?soe_increment_id=<?=$block->getIncrementId()?>'));
+                }, 3000);
+            });
+        </script>
+    </div>
+<?php else: ?>
+    <div class="paynopain-paylands-iframe">
+        <iframe id="paylands" title="Paylands"  width="600" height="800" frameBorder="0" src="<?=$block->getIframeUrl();?>"></iframe>
+    </div>
+<?php endif;?>
+

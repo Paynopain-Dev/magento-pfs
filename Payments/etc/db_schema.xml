@@ -1,0 +1,93 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="paynopain_generated_payment_order" resource="default" engine="innodb" comment="Paynopain generated payment order table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Extension attribute entity id" />
+        <column xsi:type="int" name="sales_order_entity_id" unsigned="true" nullable="false" identity="false" comment="SalesOrder entity id" />
+        <column xsi:type="varchar" name="current_time" length="64" nullable="false" comment="Current time" />
+        <column xsi:type="int" name="code" padding="10" unsigned="true" nullable="false" identity="false" comment="Code"/>
+        <column xsi:type="text" name="message" nullable="false" comment="Message" />
+        <column xsi:type="text" name="token" nullable="false" comment="Response token" />
+        <column xsi:type="varchar" name="order_uuid" length="255" nullable="false" comment="Order UUID" />
+        <column xsi:type="varchar" name="order_created" length="64" nullable="false" comment="Order created time" />
+        <column xsi:type="varchar" name="order_created_from_client_timezone" length="64" nullable="false" comment="Order created from client timezone" />
+        <column xsi:type="tinyint" name="order_paid" nullable="false" unsigned="false" default="0" comment="Order paid" />
+        <column xsi:type="varchar" name="order_status" length="255" nullable="false" comment="Order status" />
+        <column xsi:type="varchar" name="order_customer" length="255" nullable="true" comment="Order customer" />
+        <column xsi:type="text" name="order_urls" nullable="false" comment="Order urls" />
+        <column xsi:type="varchar" name="validation_hash" length="255" nullable="false" comment="Validation hash" />
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id" />
+        </constraint>
+
+        <constraint xsi:type="foreign" referenceId="FK_PAYNOPAIN_GENERATED_PAYMENT_ORDER_SALES_ORDER_ENTITY_ID_SALES_ORDER_ENTITY_ID" table="paynopain_generated_payment_order" column="sales_order_entity_id" referenceTable="sales_order" referenceColumn="entity_id" onDelete="CASCADE" />
+
+        <constraint xsi:type="unique" referenceId="UNIQUE_PAYNOPAIN_GENERATED_PAYMENT_ORDER_ORDER_UUID">
+            <column name="order_uuid" />
+        </constraint>
+
+        <index referenceId="IDX_PAYNOPAIN_GENERATED_PAYMENT_ORDER_SALES_ORDER_ENTITY_ID" indexType="btree">
+            <column name="sales_order_entity_id" />
+        </index>
+    </table>
+
+    <table name="paynopain_card_token" resource="default" engine="innodb" comment="Paynopain card token table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Extension attribute entity id" />
+        <column xsi:type="int" name="customer_entity_id" unsigned="true" nullable="false" identity="false" comment="Customer entity id" />
+        <column xsi:type="int" name="code" padding="10" unsigned="true" nullable="false" identity="false" comment="Code" />
+        <column xsi:type="text" name="message" nullable="false" comment="Message" />
+        <column xsi:type="varchar" name="current_time" length="64" nullable="false" comment="Current time" />
+        <column xsi:type="varchar" name="source_uuid" length="255" nullable="false" comment="Source UUID" />
+        <column xsi:type="varchar" name="type" length="1" nullable="true" comment="Type" />
+        <column xsi:type="varchar" name="client_uuid" length="255" nullable="true" comment="Client UUID" />
+        <column xsi:type="varchar" name="brand" length="32" nullable="false" comment="Brand" />
+        <column xsi:type="varchar" name="holder" length="255" nullable="false" comment="Holder" />
+        <column xsi:type="varchar" name="bin" length="6" nullable="false" comment="Bin" />
+        <column xsi:type="varchar" name="last4" length="4" nullable="false" comment="Last 4 digits" />
+        <column xsi:type="varchar" name="expire_month" length="2" nullable="false" comment="Expire month" />
+        <column xsi:type="varchar" name="expire_year" length="4" nullable="false" comment="Expire year" />
+        <column xsi:type="varchar" name="additional" length="255" nullable="true" comment="Additional" />
+        <column xsi:type="varchar" name="validation_date" length="64" nullable="true" comment="Source validation date" />
+        <column xsi:type="varchar" name="creation_date" length="64" nullable="false" comment="Source creation date" />
+        <column xsi:type="text" name="token" nullable="false" comment="Response token" />
+
+        <constraint xsi:type="foreign" referenceId="PAYNOPAIN_CARD_TOKEN_CUSTOMER_ENTITY_ID_CUSTOMER_ENTITY_ENTITY_ID" table="paynopain_card_token" column="customer_entity_id" referenceTable="customer_entity" referenceColumn="entity_id" onDelete="CASCADE" />
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id" />
+        </constraint>
+
+        <index referenceId="IDX_PAYNOPAIN_CARD_TOKEN_CUSTOMER_ENTITY_ID" indexType="btree">
+            <column name="customer_entity_id" />
+        </index>
+
+        <index referenceId="IDX_PAYNOPAIN_CARD_TOKEN_CLIENT_UUID" indexType="btree">
+            <column name="client_uuid" />
+        </index>
+
+        <index referenceId="IDX_PAYNOPAIN_CARD_TOKEN_SOURCE_UUID" indexType="btree">
+            <column name="source_uuid" />
+        </index>
+    </table>
+
+    <table name="paynopain_customer_address_uuid" resource="default" engine="innodb" comment="Paynopain customer address uuid extension attribute table">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id" />
+        <column xsi:type="int" name="customer_address_id" unsigned="true" nullable="false" identity="false" comment="Customer address ID" />
+        <column xsi:type="varchar" name="uuid" length="255" nullable="false" comment="Payland address UUID" />
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id" />
+        </constraint>
+
+        <constraint xsi:type="foreign" referenceId="PAYNOPAIN_CUSTOMER_ADDRESS_UUID_CUSTOMER_ADDRESS_ID_CUSTOMER_ADDRESS_ENTITY_ENTITY_ID" table="paynopain_customer_address_uuid" column="customer_address_id" referenceTable="customer_address_entity" referenceColumn="entity_id" onDelete="CASCADE" />
+
+        <constraint xsi:type="unique" referenceId="PAYNOPAIN_CUSTOMER_ADDRESS_UUID_CUSTOMER_ADDRESS_ID_UUID">
+            <column name="customer_address_id" />
+            <column name="uuid" />
+        </constraint>
+
+        <index referenceId="PAYNOPAIN_CUSTOMER_ADDRESS_UUID_CUSTOMER_ADDRESS_ID" indexType="btree">
+            <column name="customer_address_id" />
+        </index>
+    </table>
+</schema>

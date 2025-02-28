@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="integration" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+        <label>Integration</label>
+
+        <field id="environment" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Environment</label>
+            <source_model>Paynopain\Payments\Model\System\Config\Source\Environment</source_model>
+            <config_path>payment/paynopain_payment/environment</config_path>
+        </field>
+
+        <field id="api_key" type="obscure" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>API Key</label>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <validate>required-entry no-whitespace</validate>
+            <config_path>payment/paynopain_payment/api_key</config_path>
+        </field>
+
+        <field id="signature" type="obscure" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Signature</label>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <validate>required-entry no-whitespace</validate>
+            <config_path>payment/paynopain_payment/signature</config_path>
+        </field>
+
+        <field id="service" type="obscure" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Service</label>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <validate>required-entry no-whitespace</validate>
+            <config_path>payment/paynopain_payment/service</config_path>
+        </field>
+
+        <field id="secure" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Enable 3DS</label>
+            <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+            <config_path>payment/paynopain_payment/secure</config_path>
+        </field>
+
+        <field id="integration_type" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Integration type</label>
+            <source_model>Paynopain\Payments\Model\System\Config\Source\Integration</source_model>
+            <config_path>payment/paynopain_payment/integration_type</config_path>
+        </field>
+
+        <field id="checkout_uuid" type="text" translate="label" sortOrder="10" showInWebsite="1" showInStore="1" showInDefault="1">
+            <label>Checkout UUID</label>
+            <depends>
+                <field id="integration_type">redirect</field>
+            </depends>
+            <validate>no-whitespace</validate>
+            <config_path>payment/paynopain_payment/checkout_uuid</config_path>
+        </field>
+    </group>
+</include>

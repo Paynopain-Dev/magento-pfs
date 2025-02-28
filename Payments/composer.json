@@ -1,0 +1,22 @@
+{
+    "name": "paynopain/module-payments",
+    "description": "Paynopain extension for Magento 2",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Redegal S.A",
+            "email": "magento@redegal.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Paynopain\\Payments\\": ""
+        }
+    }
+}

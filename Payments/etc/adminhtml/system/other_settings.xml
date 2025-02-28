@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <group id="other_settings" translate="label" sortOrder="10" showInWebsite="1" showInStore="1"  showInDefault="1">
+        <label>Other settings</label>
+
+        <field id="debug_logs" type="select" translate="label" sortOrder="10" showInWebsite="1" showInStore="1"  showInDefault="1">
+            <label>Debug Logs</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>payment/paynopain_payment/debug_logs</config_path>
+        </field>
+    </group>
+</include>

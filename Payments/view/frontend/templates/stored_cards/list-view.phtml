@@ -1,0 +1,93 @@
+<?php /** @var \Magento\Framework\Escaper $escaper */?>
+<?php /** @var \Paynopain\Payments\Block\StoredCards\ListView $block */?>
+<?php /** @var \Paynopain\Payments\Api\Data\CardTokenInterface $storedCardToken */?>
+<div class="dashboard__content stored-card-list">
+    <div class="dashboard__description">
+        <legend class="legend">
+            <span>
+                <?=$block->escapeHtmlAttr(__('Manage your Paylands stored cards here'))?>
+            </span>
+        </legend>
+    </div>
+    <div class="stored-cards">
+        <?php foreach ($block->getStoredCards() as $storedCardToken): ?>
+            <div class="stored-card">
+                <div class="panel">
+                    <div class="card card--front">
+                        <div class="card__number"><?=substr($storedCardToken->getBin(), 0, 4)?> XXXX XXXX <?=$storedCardToken->getLast4();?></div>
+                        <div class="card__expiry-date"><?=$storedCardToken->getExpireMonth();?> / <?=$storedCardToken->getExpireYear();?></div>
+                        <div class="card__additional"><?=$storedCardToken->getAdditional();?></div>
+                        <div class="card__logo"><?=$storedCardToken->getBrand();?></div>
+
+                        <div class="form">
+                            <form
+                            class="form update-additional"
+                            action="<?=$escaper->escapeUrl($block->getUpdateUrl())?>"
+                            method="post"
+                            data-hasrequired="<?=$block->escapeHtmlAttr(__('* Required Fields'))?>"
+                            data-mage-init='{"validation":{}}'
+                            enctype="multipart/form-data"
+                            autocomplete="off">
+                                <fieldset class="fieldset info">
+                                    <div class="dashboard-form__columns dashboard-form__columns--columns3-1">
+                                        <div class="input additional required">
+                                            <label class="label" for="additional-<?=$storedCardToken->getId()?>"></label>
+                                            <input
+                                                name="additional"
+                                                id="additional-<?=$storedCardToken->getId()?>"
+                                                title="<?=__('Update description');?>"
+                                                placeholder="<?=__('Update description');?>"
+                                                value=""
+                                                class="input__field"
+                                                type="text"
+                                                maxlength="64"
+                                                data-validate="{'required':true}">
+
+                                                <input
+                                                    name="entity_id"
+                                                    value="<?=$storedCardToken->getId()?>"
+                                                    type="hidden">
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <div class="dashboard__actions">
+                                    <button
+                                        type="submit"
+                                        class="button submit"
+                                        title="<?=$block->escapeHtmlAttr(__('Update description'))?>"
+                                    >
+                                        <?=$block->escapeHtmlAttr(__('Update description'))?>
+                                    </button>
+                                </div>
+                            </form>
+
+                            <form
+                                class="form delete"
+                                action="<?=$escaper->escapeUrl($block->getDeleteUrl())?>"
+                                method="post"
+                                data-hasrequired="<?=$block->escapeHtmlAttr(__('* Required Fields'))?>"
+                                data-mage-init='{"validation":{}}'
+                                enctype="multipart/form-data"
+                                autocomplete="off">
+                                    <input
+                                        name="entity_id"
+                                        value="<?=$storedCardToken->getId()?>"
+                                        type="hidden">
+                                    <div class="dashboard__actions primary">
+                                        <button
+                                            type="submit"
+                                            class="action primary button submit"
+                                            title="<?=$block->escapeHtmlAttr(__('Delete'))?>"
+                                        >
+                                            <?=$block->escapeHtmlAttr(__('Delete'))?>
+                                        </button>
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach;?>
+    </div>
+</div>
