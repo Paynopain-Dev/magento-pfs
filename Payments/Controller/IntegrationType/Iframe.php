@@ -43,7 +43,7 @@ class Iframe implements HttpGetActionInterface
         }
 
         $resultPage = $this->resultPageFactory->create();
-        $response = $this->baseAction->baseRequest((int) $orderId);
+        $response = $this->baseAction->baseRequest((string) $orderId);
 
         if ($this->baseAction->getDirectToSuccess()) {
             $redirect = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
